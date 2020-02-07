@@ -9,7 +9,7 @@ public class UNogsAPIClient {
         self.apiKey = apiKey
     }
 
-    public func fetchCountries() -> AnyPublisher<CountriesResponse, Error> {
+    public func fetchCountries() -> AnyPublisher<ItemsResponse<Country>, Error> {
         let headers = [
             "x-rapidapi-host": "unogs-unogs-v1.p.rapidapi.com",
             "x-rapidapi-key": apiKey
@@ -23,7 +23,7 @@ public class UNogsAPIClient {
 
         let publisher = URLSession.shared.dataTaskPublisher(for: request as URLRequest)
             .map { $0.data }
-            .decode(type: CountriesResponse.self, decoder: JSONDecoder())
+            .decode(type: ItemsResponse<Country>.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
         return publisher
     }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Country: Codable {
+public struct Country: Codable, Equatable {
     public enum InformationIndex: Int {
         case shortCode = 1
         case name = 2
@@ -19,11 +19,17 @@ public struct Country: Codable {
     let shortCode: String
     let priceType: String
 
-    init(values: [String]) {
-        self.values = values
-        self.name = values[.name]
-        self.shortCode = values[.shortCode]
-        self.priceType = values[.priceType]
+    public init(from decoder: Decoder) throws {
+        let value = try decoder.singleValueContainer()
+        values = try value.decode([String].self)
+        name = values[.name]
+        shortCode = values[.shortCode]
+        priceType = values[.priceType]
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(values)
     }
 }
 
