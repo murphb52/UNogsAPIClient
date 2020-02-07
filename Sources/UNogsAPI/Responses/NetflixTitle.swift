@@ -6,21 +6,24 @@
 //
 
 import Foundation
+import Combine
 
-public struct NetflixTitle: Codable, Equatable {
-    enum TitleType : String, Codable {
+public struct NetflixTitle: Codable, Equatable, Identifiable {
+    public enum TitleType : String, Codable {
         case series
         case movie
     }
 
-    let title: String
-    let image: String
-    let synopsis: String
-    let rating: String
-    let type: TitleType
-    let released: String
-    let runtime: String
-    let unogsdate: String
+    public var id: String { return netflixid }
+    public let netflixid: String
+    public let title: String
+    public let image: String
+    public let synopsis: String
+    public let rating: String
+    public let type: TitleType
+    public let released: String
+    public let runtime: String
+    public let unogsdate: String
     /*
      "title":"Heidi"
      "image":"http://art-1.nflximg.net/de202/fd3380ee585b86954bd7ed91dd331f1d02dde202.jpg"
