@@ -37,6 +37,26 @@ public struct NetflixTitle: Codable, Equatable, Identifiable {
      "imdbid":"tt3700392"
      "download":"0"
      */
+
+    public init(netflixid: String,
+                title: String,
+                image: String,
+                synopsis: String,
+                rating: String,
+                type: TitleType,
+                released: String,
+                runtime: String,
+                unogsdate: String) {
+        self.netflixid = netflixid
+        self.title = title
+        self.image = image
+        self.synopsis = synopsis
+        self.rating = rating
+        self.type = type
+        self.released = released
+        self.runtime = runtime
+        self.unogsdate = unogsdate
+    }
 }
 
 extension NetflixTitle: CustomDebugStringConvertible {
