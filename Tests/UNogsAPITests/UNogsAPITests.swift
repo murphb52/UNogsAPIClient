@@ -18,9 +18,9 @@ final class UNogsAPITests: XCTestCase {
         sut.fetchCountries()
             .sink(receiveCompletion: { (completion) in },
                   receiveValue: { (countriesResponse) in
-                    countriesResponse.countries.forEach { print($0) }
+                    countriesResponse.objects.forEach { print($0) }
                     XCTAssertEqual(countriesResponse.count, "34")
-                    XCTAssertEqual(countriesResponse.countries.count, 34)
+                    XCTAssertEqual(countriesResponse.objects.count, 34)
                     testExpectation.fulfill()
             })
             .store(in: &disposabes)
