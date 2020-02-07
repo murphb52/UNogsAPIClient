@@ -7,17 +7,18 @@
 
 import Foundation
 
-public struct Country: Codable, Equatable {
+public struct Country: Codable, Equatable, Identifiable {
     public enum InformationIndex: Int {
         case shortCode = 1
         case name = 2
         case priceType = 9
     }
 
+    public var id: String { return shortCode }
     let values: [String]
-    let name: String
-    let shortCode: String
-    let priceType: String
+    public let name: String
+    public let shortCode: String
+    public let priceType: String
 
     public init(from decoder: Decoder) throws {
         let value = try decoder.singleValueContainer()
