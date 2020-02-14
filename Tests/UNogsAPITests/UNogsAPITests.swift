@@ -45,9 +45,19 @@ final class UNogsAPITests: XCTestCase {
     }
 
     func testFilteredTitles() {
-        JSONStubManager.setupStub(.filteredTitles)
+        let query = FilteredTitlesQuery(queryType: .blank,
+                                        year: .standard,
+                                        netflixRating: .standard,
+                                        imdbRating: .standard,
+                                        sort: .rating,
+                                        subtitle: .any,
+                                        audio: .any,
+                                        videoType: .any,
+                                        genreID: 0)
 
-        assert(publisher: sut.filteredTitlesPublisher()) { response in
+        JSONStubManager.setupStub(.filteredTitles(query: query))
+        
+        assert(publisher: sut.filteredTitlesPublisher(query: query)) { response in
             response.objects.forEach { print($0) }
             XCTAssertEqual(response.count, "11118")
             XCTAssertEqual(response.objects.count, 100)

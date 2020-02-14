@@ -8,6 +8,7 @@
 import Foundation
 import OHHTTPStubsSwift
 import OHHTTPStubs
+import UNogsAPI
 
 public class JSONStubManager {
 
@@ -15,7 +16,7 @@ public class JSONStubManager {
         case countries
         case newReleases
         case expiring
-        case filteredTitles
+        case filteredTitles(query: FilteredTitlesQuery)
     }
 
     public static func setupStub(_ stubType: StubType) {
@@ -43,7 +44,7 @@ private extension JSONStubManager {
         case .countries: return CountriesStub()
         case .newReleases: return NewReleasesStub()
         case .expiring: return ExpiringStub()
-        case .filteredTitles: return FilteredTitlesStub()
+        case .filteredTitles(let query): return FilteredTitlesStub(query: query)
         }
     }
 

@@ -6,14 +6,21 @@
 //
 
 import Foundation
+@testable import UNogsAPI
 
 internal struct FilteredTitlesStub: JSONStub {
-    var request = JSONStubRequest(queryParams: ["q" : "-!1900,2018-!0,5-!0,10-!0-!Any-!Any-!Any-!gt1-!{downloadable}",
-                                                "t": "ns",
-                                                "cl": "all",
-                                                "st": "adv",
-                                                "ob": "Relevance",
-                                                "p": "1",
-                                                "sa": "an"])
+    var request: JSONStubRequest
     var response = JSONStubResponse(fileName: "filtered_titles.json")
+
+    init(query: FilteredTitlesQuery) {
+        self.request = JSONStubRequest(queryParams:
+            ["q" : query.queryString,
+             "t": "ns",
+             "cl": "all",
+             "st": "adv",
+             "ob": query.sort.rawValue,
+             "p": "1",
+             "sa": "an"]
+        )
+    }
 }
