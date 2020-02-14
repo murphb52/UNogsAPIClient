@@ -1,6 +1,6 @@
 import XCTest
 import Foundation
-import UNogsAPI
+@testable import UNogsAPI
 import Combine
 
 final class UNogsAPITests: XCTestCase {
@@ -10,9 +10,13 @@ final class UNogsAPITests: XCTestCase {
 
     override func tearDown() {
         disposabes.removeAll()
+
+        JSONStubManager.tearDown()
     }
 
     func testCountries() {
+        JSONStubManager.setupStub(.countries)
+
         assert(publisher: sut.countriesPublisher()) { response in
             response.objects.forEach { print($0) }
             XCTAssertEqual(response.count, "34")
@@ -21,25 +25,31 @@ final class UNogsAPITests: XCTestCase {
     }
 
     func testNewReleases() {
+        JSONStubManager.setupStub(.newReleases)
+
         assert(publisher: sut.newReleasesPublisher()) { response in
             response.objects.forEach { print($0) }
-            XCTAssertEqual(response.count, "30")
-            XCTAssertEqual(response.objects.count, 30)
+            XCTAssertEqual(response.count, "36")
+            XCTAssertEqual(response.objects.count, 36)
         }
     }
 
     func testExpiring() {
+        JSONStubManager.setupStub(.expiring)
+
         assert(publisher: sut.expiringPublisher()) { response in
             response.objects.forEach { print($0) }
-            XCTAssertEqual(response.count, "66")
-            XCTAssertEqual(response.objects.count, 66)
+            XCTAssertEqual(response.count, "70")
+            XCTAssertEqual(response.objects.count, 70)
         }
     }
 
     func testFilteredTitles() {
+        JSONStubManager.setupStub(.filteredTitles)
+
         assert(publisher: sut.filteredTitlesPublisher()) { response in
             response.objects.forEach { print($0) }
-            XCTAssertEqual(response.count, "11106")
+            XCTAssertEqual(response.count, "11118")
             XCTAssertEqual(response.objects.count, 100)
         }
     }
@@ -47,6 +57,8 @@ final class UNogsAPITests: XCTestCase {
     static var allTests = [
         ("testCountries", testCountries),
         ("testNewReleases", testNewReleases),
+        ("testExpiring", testExpiring),
+        ("testFilteredTitles", testFilteredTitles),
     ]
 }
 
@@ -79,3 +91,4 @@ extension Subscribers.Completion {
         }
     }
 }
+
