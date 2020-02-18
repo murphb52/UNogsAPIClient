@@ -4,6 +4,10 @@ language: swift
 osx_image: xcode11.3
 install: swift package update
 script:
-  - ls -al
+  - swift package generate-xcodeproj
   - swift build
   - swift test
+
+xcode_project: UNogsAPI.xcodeproj # path to your xcodeproj folder
+xcode_scheme: UNogsAPIClientTests
+xcode_destination: platform=iOS Simulator,OS=13.2,name=iPad Pro (9.7-inch)
