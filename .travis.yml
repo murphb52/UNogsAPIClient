@@ -2,10 +2,8 @@ os:
   - osx
 language: swift
 osx_image: xcode11
-env:
-  - PROJECT_NAME=UNogsAPIClient
 install: swift package update
 script:
   - ls -al
-  - (cd $PROJECT_NAME && swift build)
-  - (cd $PROJECT_NAME && swift test)
+  - swift build
+  - swift test
