@@ -9,5 +9,5 @@ script:
   - swift test
 
 xcode_project: UNogsAPI.xcodeproj # path to your xcodeproj folder
-xcode_scheme: UNogsAPIClientTests
+xcode_scheme: UNogsAPI-Package
 xcode_destination: platform=iOS Simulator,OS=13.2,name=iPad Pro (9.7-inch)
