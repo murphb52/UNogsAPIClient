@@ -39,7 +39,3 @@ private extension Array where Element == String {
         return self[index.rawValue]
     }
 }
-
-extension Country: CustomDebugStringConvertible {
-    public var debugDescription: String { "\(shortCode), \(values.count): \(name)" }
-}

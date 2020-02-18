@@ -20,6 +20,40 @@ final class CodableConformanceTests: XCTestCase {
         assertCodableConformance(of: country)
     }
 
+    func testDecodingNetflixTitleWithIncorrectTitleType() throws {
+        let fileURL = JSONFileReader.shared.jsonFile(named: "netflix_title_incorrect_title_type.json")!
+        let data = try Data(contentsOf: fileURL)
+        do {
+            _ = try JSONDecoder().decode(NetflixTitle.self, from: data)
+            XCTFail()
+        } catch {
+            guard let decodingError = error as? DecodingError else {
+                XCTFail("Unexpected Failure")
+                return
+            }
+            switch decodingError {
+            case .dataCorrupted(let context):
+                XCTAssertEqual(context.debugDescription, "Unknown TitleType: something wrong")
+            default: XCTFail("Unexpected Failure")
+            }
+        }
+    }
+
+    func testCodableConformanceOfNetflixTitle() throws {
+        let title = NetflixTitle(netflixid: "123",
+                                 title: "Movie Title!",
+                                 image: "...",
+                                 synopsis: "...",
+                                 rating: "5",
+                                 type: .movie,
+                                 released: "Yesterday",
+                                 runtime: "123mins",
+                                 unogsdate: "2019-09")
+        let encoded = try JSONEncoder().encode(title)
+        let decoded = try JSONDecoder().decode(NetflixTitle.self, from: encoded)
+        XCTAssertEqual(title, decoded)
+    }
+
 }
 
 

@@ -20,6 +20,7 @@ final class UNogsAPITests: XCTestCase {
         assert(publisher: sut.countriesPublisher()) { response in
             XCTAssertEqual(response.count, "34")
             XCTAssertEqual(response.objects.count, 34)
+            XCTAssertEqual(response.objects.first?.id, response.objects.first?.shortCode)
         }
     }
 
@@ -29,6 +30,7 @@ final class UNogsAPITests: XCTestCase {
         assert(publisher: sut.newReleasesPublisher()) { response in
             XCTAssertEqual(response.count, "36")
             XCTAssertEqual(response.objects.count, 36)
+            XCTAssertEqual(response.objects.first?.id, response.objects.first?.netflixid)
         }
     }
 
@@ -38,10 +40,11 @@ final class UNogsAPITests: XCTestCase {
         assert(publisher: sut.expiringPublisher()) { response in
             XCTAssertEqual(response.count, "70")
             XCTAssertEqual(response.objects.count, 70)
+            XCTAssertEqual(response.objects.first?.id, response.objects.first?.netflixid)
         }
     }
 
-    func testFilteredTitles() {
+    func testFilteredTitlesWithBlankQuery() {
         let query = FilteredTitlesQuery(queryType: .blank,
                                         year: .standard,
                                         netflixRating: .standard,
@@ -57,6 +60,27 @@ final class UNogsAPITests: XCTestCase {
         assert(publisher: sut.filteredTitlesPublisher(query: query)) { response in
             XCTAssertEqual(response.count, "11118")
             XCTAssertEqual(response.objects.count, 100)
+            XCTAssertEqual(response.objects.first?.id, response.objects.first?.netflixid)
+        }
+    }
+
+    func testFilteredTitlesWith7DaysNewQuery() {
+        let query = FilteredTitlesQuery(queryType: .getNew(days: 7),
+                                        year: .standard,
+                                        netflixRating: .standard,
+                                        imdbRating: .standard,
+                                        sort: .rating,
+                                        subtitle: .any,
+                                        audio: .any,
+                                        videoType: .any,
+                                        genreID: 0)
+
+        JSONStubManager.setupStub(.filteredTitles(query: query))
+
+        assert(publisher: sut.filteredTitlesPublisher(query: query)) { response in
+            XCTAssertEqual(response.count, "11118")
+            XCTAssertEqual(response.objects.count, 100)
+            XCTAssertEqual(response.objects.first?.id, response.objects.first?.netflixid)
         }
     }
 }
