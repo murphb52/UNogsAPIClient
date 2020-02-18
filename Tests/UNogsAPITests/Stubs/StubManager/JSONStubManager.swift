@@ -24,10 +24,12 @@ public class JSONStubManager {
         let condition = isHost(stubDetails.request.host)
             && pathEndsWith(stubDetails.request.path)
             && containsQueryParams(stubDetails.request.queryParms)
-        let url = JSONFileReader.shared.jsonFile(named: stubDetails.response.fileName)
+        guard let url = JSONFileReader.shared.jsonFile(named: stubDetails.response.fileName) else {
+            return
+        }
 
         stub(condition: condition) { _ in
-            return fixture(filePath: url!.path, headers: nil)
+            return fixture(filePath: url.path, headers: nil)
         }
     }
 

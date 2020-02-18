@@ -18,7 +18,6 @@ final class UNogsAPITests: XCTestCase {
         JSONStubManager.setupStub(.countries)
 
         assert(publisher: sut.countriesPublisher()) { response in
-            response.objects.forEach { print($0) }
             XCTAssertEqual(response.count, "34")
             XCTAssertEqual(response.objects.count, 34)
         }
@@ -28,7 +27,6 @@ final class UNogsAPITests: XCTestCase {
         JSONStubManager.setupStub(.newReleases)
 
         assert(publisher: sut.newReleasesPublisher()) { response in
-            response.objects.forEach { print($0) }
             XCTAssertEqual(response.count, "36")
             XCTAssertEqual(response.objects.count, 36)
         }
@@ -38,7 +36,6 @@ final class UNogsAPITests: XCTestCase {
         JSONStubManager.setupStub(.expiring)
 
         assert(publisher: sut.expiringPublisher()) { response in
-            response.objects.forEach { print($0) }
             XCTAssertEqual(response.count, "70")
             XCTAssertEqual(response.objects.count, 70)
         }
@@ -58,18 +55,10 @@ final class UNogsAPITests: XCTestCase {
         JSONStubManager.setupStub(.filteredTitles(query: query))
         
         assert(publisher: sut.filteredTitlesPublisher(query: query)) { response in
-            response.objects.forEach { print($0) }
             XCTAssertEqual(response.count, "11118")
             XCTAssertEqual(response.objects.count, 100)
         }
     }
-
-    static var allTests = [
-        ("testCountries", testCountries),
-        ("testNewReleases", testNewReleases),
-        ("testExpiring", testExpiring),
-        ("testFilteredTitles", testFilteredTitles),
-    ]
 }
 
 private extension UNogsAPITests {
