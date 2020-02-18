@@ -20,10 +20,6 @@ final class CodableConformanceTests: XCTestCase {
         assertCodableConformance(of: country)
     }
 
-    static var allTests = [
-        ("testCodableConformance", testCodableConformance),
-    ]
-
 }
 
 

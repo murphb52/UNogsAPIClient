@@ -17,12 +17,11 @@ public class JSONFileReader {
     }
 
     private func populateCache() {
-        let baseURL = urlForCurrentDir()
-        let enumerator = FileManager.default.enumerator(at: baseURL,
-                                       includingPropertiesForKeys: [.nameKey],
-                                       options: []) { (url, error) -> Bool in
-                                        return false
-        }
+        let JSONFilesDir = constructJSONFilesDirectory()
+        let enumerator = FileManager.default.enumerator(at: JSONFilesDir,
+                                                        includingPropertiesForKeys: [.nameKey],
+                                                        options: [],
+                                                        errorHandler: { _,_ in return true })
 
         for case let url as URL in enumerator! where url.isFileURL {
             fileCache[url.lastPathComponent] = url
@@ -33,7 +32,7 @@ public class JSONFileReader {
         return fileCache[named]
     }
 
-    func urlForCurrentDir() -> URL {
+    func constructJSONFilesDirectory() -> URL {
         var currentFileURL = URL(fileURLWithPath: "\(#file)", isDirectory: false)
         while currentFileURL.lastPathComponent != "UNogsAPITests" {
             currentFileURL.deleteLastPathComponent()
