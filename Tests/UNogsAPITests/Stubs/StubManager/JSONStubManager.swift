@@ -19,14 +19,12 @@ public class JSONStubManager {
         case filteredTitles(query: FilteredTitlesQuery)
     }
 
-    public static func setupStub(_ stubType: StubType) {
+    public static func setupStub(_ stubType: StubType) throws {
         let stubDetails = details(for: stubType)
         let condition = isHost(stubDetails.request.host)
             && pathEndsWith(stubDetails.request.path)
             && containsQueryParams(stubDetails.request.queryParms)
-        guard let url = JSONFileReader.shared.jsonFile(named: stubDetails.response.fileName) else {
-            return
-        }
+        let url = try JSONFileReader.shared.jsonFile(named: stubDetails.response.fileName)
 
         stub(condition: condition) { _ in
             return fixture(filePath: url.path, headers: nil)
