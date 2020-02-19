@@ -5,6 +5,6 @@ osx_image: xcode11.3
 install: 
   - swift package update
 script:
-  - xcodebuild test -workspace .swiftpm/xcode/package.xcworkspace/ -scheme UNogsAPI -destination 'platform=iOS Simulator,OS=13.3,name=iPhone 8' -enableCodeCoverage YES
+  - xcodebuild test -workspace .swiftpm/xcode/package.xcworkspace/ -scheme UNogsAPI -destination 'platform=iOS Simulator,OS=13.3,name=iPhone 8'
 after_success:
   - bash <(curl -s https://codecov.io/bash) -t aa7232f9-537c-4f8e-bb0d-bce9070934f3
