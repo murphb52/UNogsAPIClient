@@ -14,18 +14,31 @@ final class UNogsAPITests: XCTestCase {
         JSONStubManager.tearDown()
     }
 
-    func testCountries() {
-        JSONStubManager.setupStub(.countries)
+    func testCountries() throws {
+        try JSONStubManager.setupStub(.countries)
 
         assert(publisher: sut.countriesPublisher()) { response in
             XCTAssertEqual(response.count, "34")
             XCTAssertEqual(response.objects.count, 34)
-            XCTAssertEqual(response.objects.first?.id, response.objects.first?.shortCode)
+
+            XCTAssertEqual(response.objects.first?.id, response.objects.first?.identifier)
+            XCTAssertEqual(response.objects.first?.identifier, "21")
+            XCTAssertEqual(response.objects.first?.shortCode, "ar")
+            XCTAssertEqual(response.objects.first?.name, "Argentina ")
+            XCTAssertEqual(response.objects.first?.newTitles, 15)
+            XCTAssertEqual(response.objects.first?.expiringTitles, 53)
+            XCTAssertEqual(response.objects.first?.totalTitles, 4514)
+            XCTAssertEqual(response.objects.first?.totalSeries, 1531)
+            XCTAssertEqual(response.objects.first?.totalMovies, 2983)
+            XCTAssertEqual(response.objects.first?.currency, "ARS")
+            XCTAssertEqual(response.objects.first?.priceTier1, "109")
+            XCTAssertEqual(response.objects.first?.priceTier2, "109")
+            XCTAssertEqual(response.objects.first?.priceTier3, "189")
         }
     }
 
-    func testNewReleases() {
-        JSONStubManager.setupStub(.newReleases)
+    func testNewReleases() throws {
+        try JSONStubManager.setupStub(.newReleases)
 
         assert(publisher: sut.newReleasesPublisher()) { response in
             XCTAssertEqual(response.count, "36")
@@ -34,8 +47,8 @@ final class UNogsAPITests: XCTestCase {
         }
     }
 
-    func testExpiring() {
-        JSONStubManager.setupStub(.expiring)
+    func testExpiring() throws {
+        try JSONStubManager.setupStub(.expiring)
 
         assert(publisher: sut.expiringPublisher()) { response in
             XCTAssertEqual(response.count, "70")
@@ -44,7 +57,7 @@ final class UNogsAPITests: XCTestCase {
         }
     }
 
-    func testFilteredTitlesWithBlankQuery() {
+    func testFilteredTitlesWithBlankQuery() throws {
         let query = FilteredTitlesQuery(queryType: .blank,
                                         year: .standard,
                                         netflixRating: .standard,
@@ -55,7 +68,7 @@ final class UNogsAPITests: XCTestCase {
                                         videoType: .any,
                                         genreID: 0)
 
-        JSONStubManager.setupStub(.filteredTitles(query: query))
+        try JSONStubManager.setupStub(.filteredTitles(query: query))
         
         assert(publisher: sut.filteredTitlesPublisher(query: query)) { response in
             XCTAssertEqual(response.count, "11118")
@@ -64,7 +77,7 @@ final class UNogsAPITests: XCTestCase {
         }
     }
 
-    func testFilteredTitlesWith7DaysNewQuery() {
+    func testFilteredTitlesWith7DaysNewQuery() throws {
         let query = FilteredTitlesQuery(queryType: .getNew(days: 7),
                                         year: .standard,
                                         netflixRating: .standard,
@@ -75,7 +88,7 @@ final class UNogsAPITests: XCTestCase {
                                         videoType: .any,
                                         genreID: 0)
 
-        JSONStubManager.setupStub(.filteredTitles(query: query))
+        try JSONStubManager.setupStub(.filteredTitles(query: query))
 
         assert(publisher: sut.filteredTitlesPublisher(query: query)) { response in
             XCTAssertEqual(response.count, "11118")

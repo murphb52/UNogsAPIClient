@@ -8,6 +8,9 @@
 import Foundation
 
 public class JSONFileReader {
+    enum Error: Swift.Error {
+        case fileNotFound
+    }
 
     public static let shared: JSONFileReader = JSONFileReader()
     private var fileCache: [String: URL] = [:]
@@ -28,8 +31,17 @@ public class JSONFileReader {
         }
     }
 
-    public func jsonFile(named: String) -> URL? {
-        return fileCache[named]
+    public func jsonFile(named: String) throws -> URL {
+        guard let url = fileCache[named] else {
+            throw Error.fileNotFound
+        }
+        return url
+    }
+
+    public func jsonData(from fileName: String) throws -> Data {
+        let file = try jsonFile(named: fileName)
+        let data = try Data(contentsOf: file)
+        return data
     }
 
     func constructJSONFilesDirectory() -> URL {
