@@ -15,6 +15,11 @@ public struct ItemsResponse<T: Codable & Equatable>: Codable, Equatable {
         case count = "COUNT"
         case objects = "ITEMS"
     }
+
+    public init(count: String, objects: [T]) {
+        self.count = count
+        self.objects = objects
+    }
 }
 
 

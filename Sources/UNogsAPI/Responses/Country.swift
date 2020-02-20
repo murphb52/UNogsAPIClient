@@ -40,6 +40,34 @@ public struct Country: Codable, Equatable, Identifiable {
     public let priceTier2: String
     public let priceTier3: String
 
+    public init(values: [String],
+                identifier: String,
+                shortCode: String,
+                name: String,
+                newTitles: Int,
+                expiringTitles: Int,
+                totalTitles: Int,
+                totalSeries: Int,
+                totalMovies: Int,
+                currency: String,
+                priceTier1: String,
+                priceTier2: String,
+                priceTier3: String) {
+        self.values = values
+        self.identifier = identifier
+        self.shortCode = shortCode
+        self.name = name
+        self.newTitles = newTitles
+        self.expiringTitles = expiringTitles
+        self.totalTitles = totalTitles
+        self.totalSeries = totalSeries
+        self.totalMovies = totalMovies
+        self.currency = currency
+        self.priceTier1 = priceTier1
+        self.priceTier2 = priceTier2
+        self.priceTier3 = priceTier3
+    }
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         values = try container.decode([String].self)

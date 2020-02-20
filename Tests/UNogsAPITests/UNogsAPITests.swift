@@ -59,9 +59,9 @@ final class UNogsAPITests: XCTestCase {
 
     func testFilteredTitlesWithBlankQuery() throws {
         let query = FilteredTitlesQuery(queryType: .blank,
-                                        year: .standard,
-                                        netflixRating: .standard,
-                                        imdbRating: .standard,
+                                        year: .init(),
+                                        netflixRating: .init(),
+                                        imdbRating: .init(),
                                         sort: .rating,
                                         subtitle: .any,
                                         audio: .any,
@@ -79,9 +79,9 @@ final class UNogsAPITests: XCTestCase {
 
     func testFilteredTitlesWith7DaysNewQuery() throws {
         let query = FilteredTitlesQuery(queryType: .getNew(days: 7),
-                                        year: .standard,
-                                        netflixRating: .standard,
-                                        imdbRating: .standard,
+                                        year: .init(),
+                                        netflixRating: .init(),
+                                        imdbRating: .init(),
                                         sort: .rating,
                                         subtitle: .any,
                                         audio: .any,
