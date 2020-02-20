@@ -5,7 +5,7 @@ import Combine
 
 final class UNogsAPITests: XCTestCase {
 
-    let sut = UNogsAPIClient()
+    let sut = UNogsAPIClient(apiKey: "dummy_key")
     var disposabes: [AnyCancellable] = []
 
     override func tearDown() {
