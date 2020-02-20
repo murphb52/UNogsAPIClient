@@ -1,5 +1,5 @@
 //
-//  NetflixTitleCodableTests.swift
+//  NetflixTitleTests.swift
 //  
 //
 //  Created by Brian Murphy on 19/02/2020.
@@ -10,7 +10,7 @@ import Foundation
 import Combine
 @testable import UNogsAPI
 
-final class NetflixTitleCodableTests: CodableConformanceTest {
+final class NetflixTitleTests: CodableConformanceTest {
 
     func testCodableConformanceOfNetflixTitle() throws {
         let title = NetflixTitle(netflixid: "123",
