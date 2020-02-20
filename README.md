@@ -4,7 +4,7 @@
 
 Swift Package to help connect easily to the UNogsAPI using Combine publishers
 
-##Installation
+## Installation
 
 ### Swift Package Manager
 
