@@ -27,7 +27,12 @@ public struct FilteredTitlesQuery {
         let minimum: Int
         let maximum: Int
 
-        public static let standard = Year(minimum: 1900, maximum: 2020)
+        public init(minimum: Int = 1900,
+                    maximum: Int = 2020) {
+            self.minimum = minimum
+            self.maximum = maximum
+        }
+
         public var stringValue: String { "\(minimum),\(maximum)" }
     }
 
@@ -35,7 +40,12 @@ public struct FilteredTitlesQuery {
         let minimum: Int
         let maximum: Int
 
-        public static let standard = NetflixRating(minimum: 0, maximum: 5)
+        public init(minimum: Int = 0,
+                    maximum: Int = 5) {
+            self.minimum = minimum
+            self.maximum = maximum
+        }
+
         public var stringValue: String { "\(minimum),\(maximum)" }
     }
 
@@ -43,7 +53,12 @@ public struct FilteredTitlesQuery {
         let minimum: Int
         let maximum: Int
 
-        public static let standard = IMDBRating(minimum: 0, maximum: 10)
+        public init(minimum: Int = 0,
+                    maximum: Int = 10) {
+            self.minimum = minimum
+            self.maximum = maximum
+        }
+
         public var stringValue: String { "\(minimum),\(maximum)" }
     }
 
@@ -84,6 +99,26 @@ public struct FilteredTitlesQuery {
     let audio: Audio
     let videoType: VideoType
     let genreID: Int
+
+    public init(queryType: QueryType,
+                year: Year,
+                netflixRating: NetflixRating,
+                imdbRating: IMDBRating,
+                sort: Sort,
+                subtitle: Subtitle,
+                audio: Audio,
+                videoType: VideoType,
+                genreID: Int) {
+        self.queryType = queryType
+        self.year = year
+        self.netflixRating = netflixRating
+        self.imdbRating = imdbRating
+        self.sort = sort
+        self.subtitle = subtitle
+        self.audio = audio
+        self.videoType = videoType
+        self.genreID = genreID
+    }
 
     public var queryString: String {
         let value = [

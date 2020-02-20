@@ -40,4 +40,24 @@ public struct NetflixTitle: Codable, Equatable, Identifiable {
     public let released: String
     public let runtime: String
     public let unogsdate: String
+
+    public init(netflixid: String,
+                title: String,
+                image: String,
+                synopsis: String,
+                rating: String,
+                type: TitleType,
+                released: String,
+                runtime: String,
+                unogsdate: String) {
+        self.netflixid = netflixid
+        self.title = title
+        self.image = image
+        self.synopsis = synopsis
+        self.rating = rating
+        self.type = type
+        self.released = released
+        self.runtime = runtime
+        self.unogsdate = unogsdate
+    }
 }
