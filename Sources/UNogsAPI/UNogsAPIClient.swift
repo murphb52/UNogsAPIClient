@@ -52,6 +52,12 @@ public class UNogsAPIClient {
         ]))
     }
 
+    public func genresPublisher() -> AnyPublisher<ItemsResponse<Genre>, Error> {
+        return publisher(for: createGetRequest(queryItems: [
+            URLQueryItem(name: "t", value: "genres")
+        ]))
+    }
+
 }
 
 private extension UNogsAPIClient {
