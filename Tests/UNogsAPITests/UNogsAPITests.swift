@@ -96,6 +96,17 @@ final class UNogsAPITests: XCTestCase {
             XCTAssertEqual(response.objects.first?.id, response.objects.first?.netflixid)
         }
     }
+
+    func testGenres() throws {
+        try JSONStubManager.setupStub(.genres)
+        
+        assert(publisher: sut.genresPublisher()) { response in
+            XCTAssertEqual(response.count, "517")
+            XCTAssertEqual(response.objects.count, 517)
+            XCTAssertEqual(response.objects.first?.name, "All Action")
+            XCTAssertEqual(response.objects.first?.identifiers.count, 21)
+        }
+    }
 }
 
 private extension UNogsAPITests {

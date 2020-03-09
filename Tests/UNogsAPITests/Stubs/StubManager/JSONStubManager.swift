@@ -17,6 +17,7 @@ public class JSONStubManager {
         case newReleases
         case expiring
         case filteredTitles(query: FilteredTitlesQuery)
+        case genres
     }
 
     public static func setupStub(_ stubType: StubType) throws {
@@ -45,6 +46,7 @@ private extension JSONStubManager {
         case .newReleases: return NewReleasesStub()
         case .expiring: return ExpiringStub()
         case .filteredTitles(let query): return FilteredTitlesStub(query: query)
+        case .genres: return GenresStub()
         }
     }
 
