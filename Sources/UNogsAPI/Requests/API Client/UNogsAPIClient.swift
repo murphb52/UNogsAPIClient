@@ -9,6 +9,9 @@ public class UNogsAPIClient {
 
     private let baseURLString = "https://unogs-unogs-v1.p.rapidapi.com/aaapi.cgi"
     private let apiKey: String
+    public var timeout: TimeInterval = 10.0
+    public var cachePolicy: NSURLRequest.CachePolicy = .useProtocolCachePolicy
+    public var decoder = JSONDecoder()
 
     public init (apiKey: String) {
         self.apiKey = apiKey
@@ -25,8 +28,8 @@ internal extension UNogsAPIClient {
         urlComponenets.queryItems = queryItems
 
         let request = NSMutableURLRequest(url: urlComponenets.url!,
-                                          cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          cachePolicy: cachePolicy,
+                                          timeoutInterval: timeout)
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         return request as URLRequest
@@ -35,7 +38,7 @@ internal extension UNogsAPIClient {
     func publisher<T: Codable>(for request: URLRequest) -> AnyPublisher<T, Error> {
         let publisher = URLSession.shared.dataTaskPublisher(for: request)
             .map { $0.data }
-            .decode(type: T.self, decoder: JSONDecoder())
+            .decode(type: T.self, decoder: decoder)
             .eraseToAnyPublisher()
         return publisher
     }
