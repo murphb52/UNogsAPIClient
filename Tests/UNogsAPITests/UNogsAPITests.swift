@@ -66,7 +66,7 @@ final class UNogsAPITests: XCTestCase {
                                         subtitle: .any,
                                         audio: .any,
                                         videoType: .any,
-                                        genreID: 0)
+                                        genres: [])
 
         try JSONStubManager.setupStub(.filteredTitles(query: query))
         
@@ -78,6 +78,7 @@ final class UNogsAPITests: XCTestCase {
     }
 
     func testFilteredTitlesWith7DaysNewQuery() throws {
+        let genre = Genre(name: "Action", identifiers: [1,2,3])
         let query = FilteredTitlesQuery(queryType: .getNew(days: 7),
                                         year: .init(),
                                         netflixRating: .init(),
@@ -86,7 +87,7 @@ final class UNogsAPITests: XCTestCase {
                                         subtitle: .any,
                                         audio: .any,
                                         videoType: .any,
-                                        genreID: 0)
+                                        genres: [genre])
 
         try JSONStubManager.setupStub(.filteredTitles(query: query))
 
