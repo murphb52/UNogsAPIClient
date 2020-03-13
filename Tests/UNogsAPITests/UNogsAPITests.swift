@@ -38,9 +38,9 @@ final class UNogsAPITests: XCTestCase {
     }
 
     func testNewReleases() throws {
-        try JSONStubManager.setupStub(.newReleases)
+        try JSONStubManager.setupStub(.newReleases(countryShortCode: "GB"))
 
-        assert(publisher: sut.newReleasesPublisher()) { response in
+        assert(publisher: sut.newReleasesPublisher(countryShortCode: "GB")) { response in
             XCTAssertEqual(response.count, "36")
             XCTAssertEqual(response.objects.count, 36)
             XCTAssertEqual(response.objects.first?.id, response.objects.first?.netflixid)
@@ -48,9 +48,9 @@ final class UNogsAPITests: XCTestCase {
     }
 
     func testExpiring() throws {
-        try JSONStubManager.setupStub(.expiring)
+        try JSONStubManager.setupStub(.expiring(countryShortCode: "US"))
 
-        assert(publisher: sut.expiringPublisher()) { response in
+        assert(publisher: sut.expiringPublisher(countryShortCode: "US")) { response in
             XCTAssertEqual(response.count, "70")
             XCTAssertEqual(response.objects.count, 70)
             XCTAssertEqual(response.objects.first?.id, response.objects.first?.netflixid)

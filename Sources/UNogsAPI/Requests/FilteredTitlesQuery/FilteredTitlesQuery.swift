@@ -19,6 +19,7 @@ public struct FilteredTitlesQuery {
     let genres: [Genre]
     let minimumIMDBVotes: MinimumIMDBVotes
     let downloadable: Downloadable
+    let countriesFilter: CountriesFilter
 
     public init(queryType: QueryType =                  .default,
                 year: Year =                            .default,
@@ -30,7 +31,8 @@ public struct FilteredTitlesQuery {
                 videoType: VideoType =                  .default,
                 genres: [Genre] =                       .default,
                 minimumIMDBVotes: MinimumIMDBVotes =    .default,
-                downloadable: Downloadable =            .default) {
+                downloadable: Downloadable =            .default,
+                countriesFilter: CountriesFilter =      .default) {
         self.queryType = queryType
         self.year = year
         self.netflixRating = netflixRating
@@ -42,6 +44,7 @@ public struct FilteredTitlesQuery {
         self.genres = genres
         self.minimumIMDBVotes = minimumIMDBVotes
         self.downloadable = downloadable
+        self.countriesFilter = countriesFilter
     }
 
     var components: [QueryComponent] {

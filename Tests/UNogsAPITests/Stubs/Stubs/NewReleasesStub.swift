@@ -8,9 +8,15 @@
 import Foundation
 
 internal struct NewReleasesStub: JSONStub {
-    var request = JSONStubRequest(queryParams: ["p": "1",
-                                                "q": "get:new7:GB",
-                                                "t": "ns",
-                                                "st": "adv"])
+    var request: JSONStubRequest
     var response = JSONStubResponse(fileName: "new_releases.json")
+
+    init(_ countryShortCode: String) {
+        self.request = JSONStubRequest(queryParams: [
+            "p": "1",
+            "q": "get:new7:\(countryShortCode)",
+            "t": "ns",
+            "st": "adv"]
+        )
+    }
 }
