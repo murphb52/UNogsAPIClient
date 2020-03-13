@@ -65,4 +65,22 @@ class FilteredTitlesQueryTests: XCTestCase {
 
     }
 
+    func testSort() {
+        XCTAssertEqual(FilteredTitlesQuery(sort: .date).sort.rawValue, "Date")
+        XCTAssertEqual(FilteredTitlesQuery(sort: .filmYear).sort.rawValue, "FilmYear")
+        XCTAssertEqual(FilteredTitlesQuery(sort: .rating).sort.rawValue, "Rating")
+        XCTAssertEqual(FilteredTitlesQuery(sort: .relevance).sort.rawValue, "Relevance")
+        XCTAssertEqual(FilteredTitlesQuery(sort: .runtime).sort.rawValue, "Runtime")
+        XCTAssertEqual(FilteredTitlesQuery(sort: .title).sort.rawValue, "Title")
+        XCTAssertEqual(FilteredTitlesQuery(sort: .videoType).sort.rawValue, "VideoType")
+        XCTAssertEqual(FilteredTitlesQuery(sort: .default).sort.rawValue, "Rating")
+    }
+
+    func testCountriesList() {
+        XCTAssertEqual(FilteredTitlesQuery().countriesFilter.stringValue, "all")
+        XCTAssertEqual(FilteredTitlesQuery(countriesFilter: .all).countriesFilter.stringValue, "all")
+        XCTAssertEqual(FilteredTitlesQuery(countriesFilter: .list(countries: [.mock(identifier: "1"),
+                                                                              .mock(identifier: "2")])).countriesFilter.stringValue, "1,2")
+    }
+
 }

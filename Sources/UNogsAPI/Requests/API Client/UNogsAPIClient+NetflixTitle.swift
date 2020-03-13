@@ -32,7 +32,7 @@ public extension UNogsAPIClient {
         return publisher(for: createGetRequest(queryItems: [
             URLQueryItem(name: "q",     value: query.queryString),
             URLQueryItem(name: "t",     value: "ns"),
-            URLQueryItem(name: "cl",    value: "all"),
+            URLQueryItem(name: "cl",    value: query.countriesFilter.stringValue),
             URLQueryItem(name: "st",    value: "adv"),
             URLQueryItem(name: "ob",    value: query.sort.rawValue),
             URLQueryItem(name: "p",     value: "1"),
