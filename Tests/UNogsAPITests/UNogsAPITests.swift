@@ -58,16 +58,7 @@ final class UNogsAPITests: XCTestCase {
     }
 
     func testFilteredTitlesWithBlankQuery() throws {
-        let query = FilteredTitlesQuery(queryType: .blank,
-                                        year: .init(),
-                                        netflixRating: .init(),
-                                        imdbRating: .init(),
-                                        sort: .rating,
-                                        subtitle: .any,
-                                        audio: .any,
-                                        videoType: .any,
-                                        genres: [])
-
+        let query = FilteredTitlesQuery()
         try JSONStubManager.setupStub(.filteredTitles(query: query))
         
         assert(publisher: sut.filteredTitlesPublisher(query: query)) { response in
@@ -80,13 +71,6 @@ final class UNogsAPITests: XCTestCase {
     func testFilteredTitlesWith7DaysNewQuery() throws {
         let genre = Genre(name: "Action", identifiers: [1,2,3])
         let query = FilteredTitlesQuery(queryType: .getNew(days: 7),
-                                        year: .init(),
-                                        netflixRating: .init(),
-                                        imdbRating: .init(),
-                                        sort: .rating,
-                                        subtitle: .any,
-                                        audio: .any,
-                                        videoType: .any,
                                         genres: [genre])
 
         try JSONStubManager.setupStub(.filteredTitles(query: query))
