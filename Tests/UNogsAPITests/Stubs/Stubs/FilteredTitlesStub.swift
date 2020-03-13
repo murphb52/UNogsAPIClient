@@ -20,7 +20,7 @@ internal struct FilteredTitlesStub: JSONStub {
              "st": "adv",
              "ob": query.sort.rawValue,
              "p": "1",
-             "sa": "an"]
+             "sa": "and"]
         )
     }
 }
