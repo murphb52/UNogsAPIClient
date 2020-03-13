@@ -98,17 +98,17 @@ public struct FilteredTitlesQuery {
     let subtitle: Subtitle
     let audio: Audio
     let videoType: VideoType
-    let genreID: Int
+    let genres: [Genre]
 
-    public init(queryType: QueryType,
-                year: Year,
-                netflixRating: NetflixRating,
-                imdbRating: IMDBRating,
-                sort: Sort,
-                subtitle: Subtitle,
-                audio: Audio,
-                videoType: VideoType,
-                genreID: Int) {
+    public init(queryType: QueryType = .blank,
+                year: Year = .init(minimum: 1990, maximum: 2020),
+                netflixRating: NetflixRating = .init(minimum: 0, maximum: 5),
+                imdbRating: IMDBRating = .init(minimum: 0, maximum: 10),
+                sort: Sort = .rating,
+                subtitle: Subtitle = .any,
+                audio: Audio = .any,
+                videoType: VideoType = .any,
+                genres: [Genre] = []) {
         self.queryType = queryType
         self.year = year
         self.netflixRating = netflixRating
@@ -117,16 +117,21 @@ public struct FilteredTitlesQuery {
         self.subtitle = subtitle
         self.audio = audio
         self.videoType = videoType
-        self.genreID = genreID
+        self.genres = genres
     }
 
     public var queryString: String {
+        let genreIdentifiers = genres
+            .flatMap { $0.identifiers }
+            .map { "\($0)" }
+            .joined(separator: ",")
+
         let value = [
             queryType.stringValue,
             year.stringValue,
             netflixRating.stringValue,
             imdbRating.stringValue,
-            "\(genreID)",
+            genreIdentifiers,
             videoType.rawValue,
             audio.rawValue,
             subtitle.rawValue,
