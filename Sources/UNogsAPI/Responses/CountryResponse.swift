@@ -1,5 +1,5 @@
 //
-//  Country.swift
+//  CountryResponse.swift
 //  UNogsAPI
 //
 //  Created by Brian Murphy on 07/02/2020.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Country: Codable, Equatable, Identifiable {
+public struct CountryResponse: Codable, Equatable, Identifiable {
     public typealias CountryIdentifier = String
 
     public enum InformationIndex: Int, CaseIterable {
@@ -95,7 +95,7 @@ public struct Country: Codable, Equatable, Identifiable {
 }
 
 private extension Array where Element == String {
-    subscript(_ index: Country.InformationIndex) -> String {
+    subscript(_ index: CountryResponse.InformationIndex) -> String {
         return self[index.rawValue]
     }
 }

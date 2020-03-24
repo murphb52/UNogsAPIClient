@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Array: QueryComponent where Element == Genre {
+extension Array: QueryComponent where Element == GenreResponse {
     var stringValue: String {
         self.flatMap { $0.identifiers }
             .map { "\($0)" }

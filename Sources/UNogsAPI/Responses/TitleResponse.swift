@@ -1,5 +1,5 @@
 //
-//  NetflixTitle.swift
+//  TitleResponse.swift
 //  UNogsAPITests
 //
 //  Created by Brian Murphy on 07/02/2020.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-public struct NetflixTitle: Codable, Equatable, Identifiable {
+public struct TitleResponse: Codable, Equatable, Identifiable {
     public enum TitleType : String, Codable {
         case series
         case movie

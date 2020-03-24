@@ -11,7 +11,7 @@ public enum CountriesFilter: QueryComponent, Defaultable {
     public static var `default` = CountriesFilter.all
 
     case all
-    case list(countryIds: [Country.CountryIdentifier])
+    case list(countryIds: [CountryResponse.CountryIdentifier])
 
     var stringValue: String {
         switch self {

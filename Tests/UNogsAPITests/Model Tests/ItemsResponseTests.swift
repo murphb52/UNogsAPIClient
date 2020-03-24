@@ -14,7 +14,7 @@ final class ItemsResponseTests: CodableConformanceTest {
 
     func testPublicInit() throws {
         let item = ItemsResponse(count: "10", objects: [
-            NetflixTitle(netflixid: "netflixid",
+            TitleResponse(netflixid: "netflixid",
                          title: "title",
                          image: "image",
                          synopsis: "synopsis",

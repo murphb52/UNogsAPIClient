@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Genre: Codable, Equatable {
+public struct GenreResponse: Codable, Equatable {
     public enum DecodingError: Error {
         case noData
     }
@@ -32,7 +32,7 @@ public struct Genre: Codable, Equatable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: GenreCodingKey.self)
         guard let key = container.allKeys.first else {
-            throw Genre.DecodingError.noData
+            throw GenreResponse.DecodingError.noData
         }
         name = key.stringValue
         identifiers = try container.decode([Int].self, forKey: key)

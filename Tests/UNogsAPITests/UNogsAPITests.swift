@@ -69,7 +69,7 @@ final class UNogsAPITests: XCTestCase {
     }
 
     func testFilteredTitlesWith7DaysNewQuery() throws {
-        let genre = Genre(name: "Action", identifiers: [1,2,3])
+        let genre = GenreResponse(name: "Action", identifiers: [1,2,3])
         let query = FilteredTitlesQuery(queryType: .getNew(days: 7),
                                         genres: [genre])
 

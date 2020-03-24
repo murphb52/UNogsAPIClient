@@ -13,7 +13,7 @@ import Combine
 final class NetflixTitleTests: CodableConformanceTest {
 
     func testCodableConformanceOfNetflixTitle() throws {
-        let title = NetflixTitle(netflixid: "123",
+        let title = TitleResponse(netflixid: "123",
                                  title: "Movie Title!",
                                  image: "...",
                                  synopsis: "...",
@@ -29,7 +29,7 @@ final class NetflixTitleTests: CodableConformanceTest {
         let fileURL = try JSONFileReader.shared.jsonFile(named: "netflix_title_incorrect_title_type.json")
         let data = try Data(contentsOf: fileURL)
         do {
-            _ = try JSONDecoder().decode(NetflixTitle.self, from: data)
+            _ = try JSONDecoder().decode(TitleResponse.self, from: data)
             XCTFail()
         } catch {
             XCTAssertTrue(error is DecodingError)

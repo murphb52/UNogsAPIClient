@@ -8,7 +8,7 @@
 import Foundation
 import UNogsAPI
 
-extension Country {
+extension CountryResponse {
     static func mock(values: [String] = [],
                      id: String = UUID().uuidString,
                      shortCode: String = UUID().uuidString,
@@ -21,8 +21,8 @@ extension Country {
                      currency: String = "GBP",
                      priceTier1: String = "1.99",
                      priceTier2: String = "2.99",
-                     priceTier3: String = "3.99") -> Country {
-        Country(values: values,
+                     priceTier3: String = "3.99") -> CountryResponse {
+        CountryResponse(values: values,
                 id: id,
                 shortCode: shortCode,
                 name: name,
@@ -37,6 +37,6 @@ extension Country {
                 priceTier3: priceTier3)
     }
 
-    static let gb = Country.mock(shortCode: "GB")
-    static let us = Country.mock(shortCode: "US")
+    static let gb = CountryResponse.mock(shortCode: "GB")
+    static let us = CountryResponse.mock(shortCode: "US")
 }

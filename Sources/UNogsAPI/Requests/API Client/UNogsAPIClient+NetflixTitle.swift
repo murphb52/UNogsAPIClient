@@ -10,7 +10,7 @@ import Combine
 
 public extension UNogsAPIClient {
     
-    func newReleasesPublisher(countryShortCode: String) -> AnyPublisher<ItemsResponse<NetflixTitle>, Error>  {
+    func newReleasesPublisher(countryShortCode: String) -> AnyPublisher<ItemsResponse<TitleResponse>, Error>  {
         return publisher(for: createGetRequest(queryItems: [
             URLQueryItem(name: "p",     value: "1"),
             URLQueryItem(name: "q",     value: "get:new7:\(countryShortCode)"),
@@ -19,7 +19,7 @@ public extension UNogsAPIClient {
         ]))
     }
 
-    func expiringPublisher(countryShortCode: String) -> AnyPublisher<ItemsResponse<NetflixTitle>, Error>  {
+    func expiringPublisher(countryShortCode: String) -> AnyPublisher<ItemsResponse<TitleResponse>, Error>  {
         return publisher(for: createGetRequest(queryItems: [
             URLQueryItem(name: "p",     value: "1"),
             URLQueryItem(name: "q",     value: "get:exp:\(countryShortCode)"),
@@ -28,7 +28,7 @@ public extension UNogsAPIClient {
         ]))
     }
 
-    func filteredTitlesPublisher(query: FilteredTitlesQuery) -> AnyPublisher<ItemsResponse<NetflixTitle>, Error> {
+    func filteredTitlesPublisher(query: FilteredTitlesQuery) -> AnyPublisher<ItemsResponse<TitleResponse>, Error> {
         return publisher(for: createGetRequest(queryItems: [
             URLQueryItem(name: "q",     value: query.queryString),
             URLQueryItem(name: "t",     value: "ns"),
