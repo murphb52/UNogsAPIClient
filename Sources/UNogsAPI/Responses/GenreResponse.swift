@@ -8,14 +8,16 @@
 import Foundation
 
 public struct GenreResponse: Codable, Equatable {
+    public typealias GenreIdentifier = Int
+
     public enum DecodingError: Error {
         case noData
     }
 
     public let name: String
-    public let identifiers: [Int]
+    public let identifiers: [GenreIdentifier]
 
-    public init(name: String, identifiers: [Int]) {
+    public init(name: String, identifiers: [GenreIdentifier]) {
         self.name = name
         self.identifiers = identifiers
     }
