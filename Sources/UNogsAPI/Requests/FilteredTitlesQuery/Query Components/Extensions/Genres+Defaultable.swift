@@ -7,6 +7,6 @@
 
 import Foundation
 
-extension Array: Defaultable where Element == Genre {
-    public static var `default`: [Genre] = []
+extension Array: Defaultable where Element == GenreResponse {
+    public static var `default`: [GenreResponse] = []
 }

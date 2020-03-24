@@ -10,7 +10,7 @@ import Combine
 
 public extension UNogsAPIClient {
 
-    func countriesPublisher() -> AnyPublisher<ItemsResponse<Country>, Error> {
+    func countriesPublisher() -> AnyPublisher<ItemsResponse<CountryResponse>, Error> {
         return publisher(for: createGetRequest(queryItems: [
             URLQueryItem(name: "t", value: "lc"),
             URLQueryItem(name: "q", value: "available"),

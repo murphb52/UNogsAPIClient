@@ -14,18 +14,18 @@ final class ItemsResponseTests: CodableConformanceTest {
 
     func testPublicInit() throws {
         let item = ItemsResponse(count: "10", objects: [
-            NetflixTitle(netflixid: "netflixid",
-                         title: "title",
-                         image: "image",
-                         synopsis: "synopsis",
-                         rating: "rating",
-                         type: .movie,
-                         released: "released",
-                         runtime: "runtime",
-                         unogsdate: "unogsdate")
+            TitleResponse(id: "netflixid",
+                          title: "title",
+                          image: "image",
+                          synopsis: "synopsis",
+                          rating: "rating",
+                          type: .movie,
+                          released: "released",
+                          runtime: "runtime",
+                          unogsdate: "unogsdate")
         ])
         XCTAssertNotNil(item)
-        XCTAssertEqual(item.objects.first?.netflixid, "netflixid")
+        XCTAssertEqual(item.objects.first?.id, "netflixid")
         XCTAssertEqual(item.objects.first?.title, "title")
         XCTAssertEqual(item.objects.first?.image, "image")
         XCTAssertEqual(item.objects.first?.synopsis, "synopsis")

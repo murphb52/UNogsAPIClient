@@ -10,7 +10,7 @@ import Combine
 
 public extension UNogsAPIClient {
 
-    func genresPublisher() -> AnyPublisher<ItemsResponse<Genre>, Error> {
+    func genresPublisher() -> AnyPublisher<ItemsResponse<GenreResponse>, Error> {
         return publisher(for: createGetRequest(queryItems: [
             URLQueryItem(name: "t", value: "genres")
         ]))

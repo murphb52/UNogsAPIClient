@@ -13,8 +13,8 @@ import Combine
 final class CountryTests: CodableConformanceTest {
 
     func testPublicInit() throws {
-        let country = Country(values: [],
-                              identifier: "identifier",
+        let country = CountryResponse(values: [],
+                              id: "identifier",
                               shortCode: "shortCode",
                               name: "name",
                               newTitles: 0,
@@ -28,7 +28,7 @@ final class CountryTests: CodableConformanceTest {
                               priceTier3: "priceTier3")
         XCTAssertNotNil(country)
         XCTAssertEqual(country.values, [])
-        XCTAssertEqual(country.identifier, "identifier")
+        XCTAssertEqual(country.id, "identifier")
         XCTAssertEqual(country.shortCode, "shortCode")
         XCTAssertEqual(country.name, "name")
         XCTAssertEqual(country.newTitles, 0)
@@ -44,14 +44,14 @@ final class CountryTests: CodableConformanceTest {
 
     func testCodableConformance() throws {
         let data = try JSONFileReader.shared.jsonData(from: "countries.json")
-        let countryResponse = try JSONDecoder().decode(ItemsResponse<Country>.self, from: data)
+        let countryResponse = try JSONDecoder().decode(ItemsResponse<CountryResponse>.self, from: data)
         try assertCodableConformance(of: countryResponse)
     }
 
     func testDecodingFailsIfIncorrectNumberOfProperties() throws {
         do {
             let data = try JSONFileReader.shared.jsonData(from: "countries_incorrect_elements.json")
-            _ = try JSONDecoder().decode(Country.self, from: data)
+            _ = try JSONDecoder().decode(CountryResponse.self, from: data)
             XCTFail()
         } catch {
             XCTAssertTrue(error is DecodingError)
@@ -61,7 +61,7 @@ final class CountryTests: CodableConformanceTest {
     func testDecodingFailsIfIntPropertiesCannotBeParsed() throws {
         do {
             let data = try JSONFileReader.shared.jsonData(from: "countries_unable_to_parse_ints.json")
-            _ = try JSONDecoder().decode(Country.self, from: data)
+            _ = try JSONDecoder().decode(CountryResponse.self, from: data)
             XCTFail()
         } catch {
             XCTAssertTrue(error is String.ParsingError)

@@ -16,7 +16,7 @@ public struct FilteredTitlesQuery {
     let subtitle: Subtitle
     let audio: Audio
     let videoType: VideoType
-    let genres: [Genre]
+    let genres: [GenreResponse]
     let minimumIMDBVotes: MinimumIMDBVotes
     let downloadable: Downloadable
     let countriesFilter: CountriesFilter
@@ -29,7 +29,7 @@ public struct FilteredTitlesQuery {
                 subtitle: Subtitle =                    .default,
                 audio: Audio =                          .default,
                 videoType: VideoType =                  .default,
-                genres: [Genre] =                       .default,
+                genres: [GenreResponse] =                       .default,
                 minimumIMDBVotes: MinimumIMDBVotes =    .default,
                 downloadable: Downloadable =            .default,
                 countriesFilter: CountriesFilter =      .default) {

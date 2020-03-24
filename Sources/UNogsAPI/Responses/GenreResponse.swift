@@ -7,15 +7,17 @@
 
 import Foundation
 
-public struct Genre: Codable, Equatable {
+public struct GenreResponse: Codable, Equatable {
+    public typealias GenreIdentifier = Int
+
     public enum DecodingError: Error {
         case noData
     }
 
     public let name: String
-    public let identifiers: [Int]
+    public let identifiers: [GenreIdentifier]
 
-    public init(name: String, identifiers: [Int]) {
+    public init(name: String, identifiers: [GenreIdentifier]) {
         self.name = name
         self.identifiers = identifiers
     }
@@ -32,7 +34,7 @@ public struct Genre: Codable, Equatable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: GenreCodingKey.self)
         guard let key = container.allKeys.first else {
-            throw Genre.DecodingError.noData
+            throw GenreResponse.DecodingError.noData
         }
         name = key.stringValue
         identifiers = try container.decode([Int].self, forKey: key)

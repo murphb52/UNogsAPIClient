@@ -48,7 +48,7 @@ class FilteredTitlesQueryTests: XCTestCase {
     }
 
     func testGenres() {
-        let genre = Genre(name: "Action", identifiers: [1,2,3])
+        let genre = GenreResponse(name: "Action", identifiers: [1,2,3])
         XCTAssertEqual(FilteredTitlesQuery(genres: []).queryString, "-!1990,2020-!0,5-!0,10-!-!Any-!Any-!Any-!gt1-!")
         XCTAssertEqual(FilteredTitlesQuery(genres: [genre]).queryString, "-!1990,2020-!0,5-!0,10-!1,2,3-!Any-!Any-!Any-!gt1-!")
     }
@@ -79,8 +79,7 @@ class FilteredTitlesQueryTests: XCTestCase {
     func testCountriesList() {
         XCTAssertEqual(FilteredTitlesQuery().countriesFilter.stringValue, "all")
         XCTAssertEqual(FilteredTitlesQuery(countriesFilter: .all).countriesFilter.stringValue, "all")
-        XCTAssertEqual(FilteredTitlesQuery(countriesFilter: .list(countries: [.mock(identifier: "1"),
-                                                                              .mock(identifier: "2")])).countriesFilter.stringValue, "1,2")
+        XCTAssertEqual(FilteredTitlesQuery(countriesFilter: .list(countryIds: ["1", "2"])).countriesFilter.stringValue, "1,2")
     }
 
 }
