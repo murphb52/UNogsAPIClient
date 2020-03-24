@@ -13,15 +13,15 @@ import Combine
 final class NetflixTitleTests: CodableConformanceTest {
 
     func testCodableConformanceOfNetflixTitle() throws {
-        let title = TitleResponse(netflixid: "123",
-                                 title: "Movie Title!",
-                                 image: "...",
-                                 synopsis: "...",
-                                 rating: "5",
-                                 type: .movie,
-                                 released: "Yesterday",
-                                 runtime: "123mins",
-                                 unogsdate: "2019-09")
+        let title = TitleResponse(id: "123",
+                                  title: "Movie Title!",
+                                  image: "...",
+                                  synopsis: "...",
+                                  rating: "5",
+                                  type: .movie,
+                                  released: "Yesterday",
+                                  runtime: "123mins",
+                                  unogsdate: "2019-09")
         try assertCodableConformance(of: title)
     }
 

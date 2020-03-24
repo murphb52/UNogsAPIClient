@@ -43,7 +43,7 @@ final class UNogsAPITests: XCTestCase {
         assert(publisher: sut.newReleasesPublisher(countryShortCode: "GB")) { response in
             XCTAssertEqual(response.count, "36")
             XCTAssertEqual(response.objects.count, 36)
-            XCTAssertEqual(response.objects.first?.id, response.objects.first?.netflixid)
+            XCTAssertEqual(response.objects.first?.id, response.objects.first?.id)
         }
     }
 
@@ -53,7 +53,7 @@ final class UNogsAPITests: XCTestCase {
         assert(publisher: sut.expiringPublisher(countryShortCode: "US")) { response in
             XCTAssertEqual(response.count, "70")
             XCTAssertEqual(response.objects.count, 70)
-            XCTAssertEqual(response.objects.first?.id, response.objects.first?.netflixid)
+            XCTAssertEqual(response.objects.first?.id, response.objects.first?.id)
         }
     }
 
@@ -64,7 +64,7 @@ final class UNogsAPITests: XCTestCase {
         assert(publisher: sut.filteredTitlesPublisher(query: query)) { response in
             XCTAssertEqual(response.count, "11118")
             XCTAssertEqual(response.objects.count, 100)
-            XCTAssertEqual(response.objects.first?.id, response.objects.first?.netflixid)
+            XCTAssertEqual(response.objects.first?.id, response.objects.first?.id)
         }
     }
 
@@ -78,7 +78,7 @@ final class UNogsAPITests: XCTestCase {
         assert(publisher: sut.filteredTitlesPublisher(query: query)) { response in
             XCTAssertEqual(response.count, "11118")
             XCTAssertEqual(response.objects.count, 100)
-            XCTAssertEqual(response.objects.first?.id, response.objects.first?.netflixid)
+            XCTAssertEqual(response.objects.first?.id, response.objects.first?.id)
         }
     }
 

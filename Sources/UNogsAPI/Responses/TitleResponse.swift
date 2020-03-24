@@ -9,29 +9,9 @@ import Foundation
 import Combine
 
 public struct TitleResponse: Codable, Equatable, Identifiable {
-    public enum TitleType : String, Codable {
-        case series
-        case movie
+    public typealias TitleIdentifier = String
 
-        public init(from decoder: Decoder) throws {
-            // The API is unreliable and have seen instances of Movies and movie being returned so we must massage the data
-            let container = try decoder.singleValueContainer()
-            let string = try decoder.singleValueContainer().decode(String.self)
-            let lowerCasedString = string.lowercased()
-            guard let type = TitleType(rawValue: lowerCasedString) else {
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown TitleType: \(string)")
-            }
-            self = type
-        }
-
-        public func encode(to encoder: Encoder) throws {
-            var container = encoder.singleValueContainer()
-            try container.encode(self.rawValue)
-        }
-    }
-
-    public var id: String { return netflixid }
-    public let netflixid: String
+    public var id: TitleIdentifier
     public let title: String
     public let image: String
     public let synopsis: String
@@ -41,7 +21,7 @@ public struct TitleResponse: Codable, Equatable, Identifiable {
     public let runtime: String
     public let unogsdate: String
 
-    public init(netflixid: String,
+    public init(id: String,
                 title: String,
                 image: String,
                 synopsis: String,
@@ -50,7 +30,7 @@ public struct TitleResponse: Codable, Equatable, Identifiable {
                 released: String,
                 runtime: String,
                 unogsdate: String) {
-        self.netflixid = netflixid
+        self.id = id
         self.title = title
         self.image = image
         self.synopsis = synopsis
@@ -59,5 +39,17 @@ public struct TitleResponse: Codable, Equatable, Identifiable {
         self.released = released
         self.runtime = runtime
         self.unogsdate = unogsdate
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case id = "netflixid"
+        case title
+        case image
+        case synopsis
+        case rating
+        case type
+        case released
+        case runtime
+        case unogsdate
     }
 }
