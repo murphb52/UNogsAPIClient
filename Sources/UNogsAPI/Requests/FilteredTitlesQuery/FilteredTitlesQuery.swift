@@ -16,23 +16,23 @@ public struct FilteredTitlesQuery {
     let subtitle: Subtitle
     let audio: Audio
     let videoType: VideoType
-    let genres: [GenreResponse]
+    let genreIdentifiers: [GenreResponse.GenreIdentifier]
     let minimumIMDBVotes: MinimumIMDBVotes
     let downloadable: Downloadable
     let countriesFilter: CountriesFilter
 
-    public init(queryType: QueryType =                  .default,
-                year: Year =                            .default,
-                netflixRating: NetflixRating =          .default,
-                imdbRating: IMDBRating =                .default,
-                sort: Sort =                            .default,
-                subtitle: Subtitle =                    .default,
-                audio: Audio =                          .default,
-                videoType: VideoType =                  .default,
-                genres: [GenreResponse] =                       .default,
-                minimumIMDBVotes: MinimumIMDBVotes =    .default,
-                downloadable: Downloadable =            .default,
-                countriesFilter: CountriesFilter =      .default) {
+    public init(queryType: QueryType =                              .default,
+                year: Year =                                        .default,
+                netflixRating: NetflixRating =                      .default,
+                imdbRating: IMDBRating =                            .default,
+                sort: Sort =                                        .default,
+                subtitle: Subtitle =                                .default,
+                audio: Audio =                                      .default,
+                videoType: VideoType =                              .default,
+                genreIdentifiers: [GenreResponse.GenreIdentifier] = .default,
+                minimumIMDBVotes: MinimumIMDBVotes =                .default,
+                downloadable: Downloadable =                        .default,
+                countriesFilter: CountriesFilter =                  .default) {
         self.queryType = queryType
         self.year = year
         self.netflixRating = netflixRating
@@ -41,7 +41,7 @@ public struct FilteredTitlesQuery {
         self.subtitle = subtitle
         self.audio = audio
         self.videoType = videoType
-        self.genres = genres
+        self.genreIdentifiers = genreIdentifiers
         self.minimumIMDBVotes = minimumIMDBVotes
         self.downloadable = downloadable
         self.countriesFilter = countriesFilter
@@ -52,7 +52,7 @@ public struct FilteredTitlesQuery {
          year,
          netflixRating,
          imdbRating,
-         genres,
+         genreIdentifiers,
          videoType,
          audio,
          subtitle,
