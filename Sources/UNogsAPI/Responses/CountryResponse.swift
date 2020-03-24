@@ -1,5 +1,5 @@
 //
-//  Country.swift
+//  CountryResponse.swift
 //  UNogsAPI
 //
 //  Created by Brian Murphy on 07/02/2020.
@@ -7,10 +7,11 @@
 
 import Foundation
 
-public struct Country: Codable, Equatable, Identifiable {
+public struct CountryResponse: Codable, Equatable, Identifiable {
+    public typealias CountryIdentifier = String
 
     public enum InformationIndex: Int, CaseIterable {
-        case identifier = 0
+        case id = 0
         case shortCode
         case name
         case newTitles
@@ -25,9 +26,8 @@ public struct Country: Codable, Equatable, Identifiable {
         case priceTier3
     }
 
-    public var id: String { return identifier }
+    public let id: CountryIdentifier
     public let values: [String]
-    public let identifier: String
     public let shortCode: String
     public let name: String
     public let newTitles: Int
@@ -41,7 +41,7 @@ public struct Country: Codable, Equatable, Identifiable {
     public let priceTier3: String
 
     public init(values: [String],
-                identifier: String,
+                id: String,
                 shortCode: String,
                 name: String,
                 newTitles: Int,
@@ -54,7 +54,7 @@ public struct Country: Codable, Equatable, Identifiable {
                 priceTier2: String,
                 priceTier3: String) {
         self.values = values
-        self.identifier = identifier
+        self.id = id
         self.shortCode = shortCode
         self.name = name
         self.newTitles = newTitles
@@ -74,7 +74,7 @@ public struct Country: Codable, Equatable, Identifiable {
         guard values.count == InformationIndex.allCases.count else {
             throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unexpected number of values")
         }
-        identifier = values[.identifier]
+        id = values[.id]
         shortCode = values[.shortCode]
         name = values[.name]
         newTitles = try values[.newTitles].toInt()
@@ -95,7 +95,7 @@ public struct Country: Codable, Equatable, Identifiable {
 }
 
 private extension Array where Element == String {
-    subscript(_ index: Country.InformationIndex) -> String {
+    subscript(_ index: CountryResponse.InformationIndex) -> String {
         return self[index.rawValue]
     }
 }

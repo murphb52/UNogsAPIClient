@@ -21,8 +21,8 @@ final class UNogsAPITests: XCTestCase {
             XCTAssertEqual(response.count, "34")
             XCTAssertEqual(response.objects.count, 34)
 
-            XCTAssertEqual(response.objects.first?.id, response.objects.first?.identifier)
-            XCTAssertEqual(response.objects.first?.identifier, "21")
+            XCTAssertEqual(response.objects.first?.id, response.objects.first?.id)
+            XCTAssertEqual(response.objects.first?.id, "21")
             XCTAssertEqual(response.objects.first?.shortCode, "ar")
             XCTAssertEqual(response.objects.first?.name, "Argentina ")
             XCTAssertEqual(response.objects.first?.newTitles, 15)
@@ -38,62 +38,47 @@ final class UNogsAPITests: XCTestCase {
     }
 
     func testNewReleases() throws {
-        try JSONStubManager.setupStub(.newReleases)
+        try JSONStubManager.setupStub(.newReleases(countryShortCode: "GB"))
 
-        assert(publisher: sut.newReleasesPublisher()) { response in
+        assert(publisher: sut.newReleasesPublisher(countryShortCode: "GB")) { response in
             XCTAssertEqual(response.count, "36")
             XCTAssertEqual(response.objects.count, 36)
-            XCTAssertEqual(response.objects.first?.id, response.objects.first?.netflixid)
+            XCTAssertEqual(response.objects.first?.id, response.objects.first?.id)
         }
     }
 
     func testExpiring() throws {
-        try JSONStubManager.setupStub(.expiring)
+        try JSONStubManager.setupStub(.expiring(countryShortCode: "US"))
 
-        assert(publisher: sut.expiringPublisher()) { response in
+        assert(publisher: sut.expiringPublisher(countryShortCode: "US")) { response in
             XCTAssertEqual(response.count, "70")
             XCTAssertEqual(response.objects.count, 70)
-            XCTAssertEqual(response.objects.first?.id, response.objects.first?.netflixid)
+            XCTAssertEqual(response.objects.first?.id, response.objects.first?.id)
         }
     }
 
     func testFilteredTitlesWithBlankQuery() throws {
-        let query = FilteredTitlesQuery(queryType: .blank,
-                                        year: .init(),
-                                        netflixRating: .init(),
-                                        imdbRating: .init(),
-                                        sort: .rating,
-                                        subtitle: .any,
-                                        audio: .any,
-                                        videoType: .any,
-                                        genreID: 0)
-
+        let query = FilteredTitlesQuery()
         try JSONStubManager.setupStub(.filteredTitles(query: query))
         
         assert(publisher: sut.filteredTitlesPublisher(query: query)) { response in
             XCTAssertEqual(response.count, "11118")
             XCTAssertEqual(response.objects.count, 100)
-            XCTAssertEqual(response.objects.first?.id, response.objects.first?.netflixid)
+            XCTAssertEqual(response.objects.first?.id, response.objects.first?.id)
         }
     }
 
     func testFilteredTitlesWith7DaysNewQuery() throws {
+        let genre = GenreResponse(name: "Action", identifiers: [1,2,3])
         let query = FilteredTitlesQuery(queryType: .getNew(days: 7),
-                                        year: .init(),
-                                        netflixRating: .init(),
-                                        imdbRating: .init(),
-                                        sort: .rating,
-                                        subtitle: .any,
-                                        audio: .any,
-                                        videoType: .any,
-                                        genreID: 0)
+                                        genres: [genre])
 
         try JSONStubManager.setupStub(.filteredTitles(query: query))
 
         assert(publisher: sut.filteredTitlesPublisher(query: query)) { response in
             XCTAssertEqual(response.count, "11118")
             XCTAssertEqual(response.objects.count, 100)
-            XCTAssertEqual(response.objects.first?.id, response.objects.first?.netflixid)
+            XCTAssertEqual(response.objects.first?.id, response.objects.first?.id)
         }
     }
 

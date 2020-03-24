@@ -8,9 +8,15 @@
 import Foundation
 
 internal struct ExpiringStub: JSONStub {
-    var request = JSONStubRequest(queryParams: ["p": "1",
-                                                "q" : "get:exp:GB",
-                                                "t": "ns",
-                                                "st": "adv"])
+    var request: JSONStubRequest
     var response = JSONStubResponse(fileName: "expiring.json")
+
+    init(_ countryShortCode: String) {
+        self.request = JSONStubRequest(queryParams: [
+            "p": "1",
+            "q" : "get:exp:\(countryShortCode)",
+            "t": "ns",
+            "st": "adv"]
+        )
+    }
 }

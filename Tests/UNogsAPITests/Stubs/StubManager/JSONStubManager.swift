@@ -14,8 +14,8 @@ public class JSONStubManager {
 
     public enum StubType {
         case countries
-        case newReleases
-        case expiring
+        case newReleases(countryShortCode: String)
+        case expiring(countryShortCode: String)
         case filteredTitles(query: FilteredTitlesQuery)
         case genres
     }
@@ -43,8 +43,8 @@ private extension JSONStubManager {
     static func details(for stubType: StubType) -> JSONStub {
         switch stubType {
         case .countries: return CountriesStub()
-        case .newReleases: return NewReleasesStub()
-        case .expiring: return ExpiringStub()
+        case .newReleases(let countryShortCode): return NewReleasesStub(countryShortCode)
+        case .expiring(let countryShortCode): return ExpiringStub(countryShortCode)
         case .filteredTitles(let query): return FilteredTitlesStub(query: query)
         case .genres: return GenresStub()
         }
