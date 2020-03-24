@@ -7,10 +7,9 @@
 
 import Foundation
 
-extension Array: QueryComponent where Element == GenreResponse {
+extension Array: QueryComponent where Element == GenreResponse.GenreIdentifier {
     var stringValue: String {
-        self.flatMap { $0.identifiers }
-            .map { "\($0)" }
+        self.map { "\($0)" }
             .joined(separator: ",")
     }
 }
