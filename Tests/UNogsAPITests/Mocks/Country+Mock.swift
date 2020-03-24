@@ -10,7 +10,7 @@ import UNogsAPI
 
 extension Country {
     static func mock(values: [String] = [],
-                     identifier: String = UUID().uuidString,
+                     id: String = UUID().uuidString,
                      shortCode: String = UUID().uuidString,
                      name: String = UUID().uuidString,
                      newTitles: Int = 1,
@@ -23,7 +23,7 @@ extension Country {
                      priceTier2: String = "2.99",
                      priceTier3: String = "3.99") -> Country {
         Country(values: values,
-                identifier: identifier,
+                id: id,
                 shortCode: shortCode,
                 name: name,
                 newTitles: newTitles,

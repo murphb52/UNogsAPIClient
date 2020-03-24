@@ -11,14 +11,14 @@ public enum CountriesFilter: QueryComponent, Defaultable {
     public static var `default` = CountriesFilter.all
 
     case all
-    case list(countries: [Country])
+    case list(countryIds: [Country.CountryIdentifier])
 
     var stringValue: String {
         switch self {
         case .all:
             return "all"
-        case .list(let countries):
-            return countries.map { $0.identifier }.joined(separator: ",")
+        case .list(let identifiers):
+            return identifiers.joined(separator: ",")
         }
     }
 }

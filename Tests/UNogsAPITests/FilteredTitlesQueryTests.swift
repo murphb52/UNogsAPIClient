@@ -79,8 +79,7 @@ class FilteredTitlesQueryTests: XCTestCase {
     func testCountriesList() {
         XCTAssertEqual(FilteredTitlesQuery().countriesFilter.stringValue, "all")
         XCTAssertEqual(FilteredTitlesQuery(countriesFilter: .all).countriesFilter.stringValue, "all")
-        XCTAssertEqual(FilteredTitlesQuery(countriesFilter: .list(countries: [.mock(identifier: "1"),
-                                                                              .mock(identifier: "2")])).countriesFilter.stringValue, "1,2")
+        XCTAssertEqual(FilteredTitlesQuery(countriesFilter: .list(countryIds: ["1", "2"])).countriesFilter.stringValue, "1,2")
     }
 
 }

@@ -21,8 +21,8 @@ final class UNogsAPITests: XCTestCase {
             XCTAssertEqual(response.count, "34")
             XCTAssertEqual(response.objects.count, 34)
 
-            XCTAssertEqual(response.objects.first?.id, response.objects.first?.identifier)
-            XCTAssertEqual(response.objects.first?.identifier, "21")
+            XCTAssertEqual(response.objects.first?.id, response.objects.first?.id)
+            XCTAssertEqual(response.objects.first?.id, "21")
             XCTAssertEqual(response.objects.first?.shortCode, "ar")
             XCTAssertEqual(response.objects.first?.name, "Argentina ")
             XCTAssertEqual(response.objects.first?.newTitles, 15)

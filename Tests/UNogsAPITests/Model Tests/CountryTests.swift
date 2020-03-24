@@ -14,7 +14,7 @@ final class CountryTests: CodableConformanceTest {
 
     func testPublicInit() throws {
         let country = Country(values: [],
-                              identifier: "identifier",
+                              id: "identifier",
                               shortCode: "shortCode",
                               name: "name",
                               newTitles: 0,
@@ -28,7 +28,7 @@ final class CountryTests: CodableConformanceTest {
                               priceTier3: "priceTier3")
         XCTAssertNotNil(country)
         XCTAssertEqual(country.values, [])
-        XCTAssertEqual(country.identifier, "identifier")
+        XCTAssertEqual(country.id, "identifier")
         XCTAssertEqual(country.shortCode, "shortCode")
         XCTAssertEqual(country.name, "name")
         XCTAssertEqual(country.newTitles, 0)
