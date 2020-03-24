@@ -69,9 +69,8 @@ final class UNogsAPITests: XCTestCase {
     }
 
     func testFilteredTitlesWith7DaysNewQuery() throws {
-        let genre = GenreResponse(name: "Action", identifiers: [1,2,3])
         let query = FilteredTitlesQuery(queryType: .getNew(days: 7),
-                                        genres: [genre])
+                                        genreIdentifiers: [1,2,3])
 
         try JSONStubManager.setupStub(.filteredTitles(query: query))
 
