@@ -12,7 +12,7 @@ public enum TitleType : String, Codable {
     case movie
 
     public init(from decoder: Decoder) throws {
-        // The API is unreliable and have seen instances of Movies and movie being returned so we must massage the data
+        // The API is unreliable and have seen instances of "Movie" and "movie" being returned so we must massage the data
         let container = try decoder.singleValueContainer()
         let string = try decoder.singleValueContainer().decode(String.self)
         let lowerCasedString = string.lowercased()
