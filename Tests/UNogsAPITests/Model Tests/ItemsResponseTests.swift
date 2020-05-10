@@ -22,7 +22,8 @@ final class ItemsResponseTests: CodableConformanceTest {
                           type: .movie,
                           released: "released",
                           runtime: "runtime",
-                          unogsdate: "unogsdate")
+                          unogsdate: "unogsdate",
+                          imdbId: "imdbID")
         ])
         XCTAssertNotNil(item)
         XCTAssertEqual(item.objects.first?.id, "netflixid")
@@ -34,6 +35,7 @@ final class ItemsResponseTests: CodableConformanceTest {
         XCTAssertEqual(item.objects.first?.released, "released")
         XCTAssertEqual(item.objects.first?.runtime, "runtime")
         XCTAssertEqual(item.objects.first?.unogsdate, "unogsdate")
+        XCTAssertEqual(item.objects.first?.imdbId, "imdbID")
     }
 
 }
