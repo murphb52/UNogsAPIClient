@@ -36,7 +36,7 @@ public extension UNogsAPIClient {
             URLQueryItem(name: "st",    value: "adv"),
             URLQueryItem(name: "ob",    value: query.sort.rawValue),
             URLQueryItem(name: "p",     value: "1"),
-            URLQueryItem(name: "sa",    value: "and"),
+            URLQueryItem(name: "sa",    value: query.subtitlesAudioAndOr.rawValue),
         ]))
     }
 

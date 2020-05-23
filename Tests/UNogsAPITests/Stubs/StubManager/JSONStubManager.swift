@@ -18,6 +18,7 @@ public class JSONStubManager {
         case expiring(countryShortCode: String)
         case filteredTitles(query: FilteredTitlesQuery)
         case genres
+        case frenchTitles
     }
 
     public static func setupStub(_ stubType: StubType) throws {
@@ -47,6 +48,7 @@ private extension JSONStubManager {
         case .expiring(let countryShortCode): return ExpiringStub(countryShortCode)
         case .filteredTitles(let query): return FilteredTitlesStub(query: query)
         case .genres: return GenresStub()
+        case .frenchTitles: return FrenchTitlesStub()
         }
     }
 

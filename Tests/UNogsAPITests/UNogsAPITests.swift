@@ -91,6 +91,18 @@ final class UNogsAPITests: XCTestCase {
             XCTAssertEqual(response.objects.first?.identifiers.count, 21)
         }
     }
+
+    func testAudioAndSubtitlesAnd() throws {
+        try JSONStubManager.setupStub(.frenchTitles)
+
+        let query = FilteredTitlesQuery(audio: .french, subtitlesAudioAndOr: .and)
+        assert(publisher: sut.filteredTitlesPublisher(query: query)) { (response) in
+            XCTAssertEqual(response.count, "2645")
+            XCTAssertEqual(response.objects.count, 100)
+            XCTAssertEqual(response.objects.first?.title, "Breaking Bad")
+            XCTAssertEqual(response.objects.first?.id, "70143836")
+        }
+    }
 }
 
 private extension UNogsAPITests {
