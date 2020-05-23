@@ -21,7 +21,8 @@ final class NetflixTitleTests: CodableConformanceTest {
                                   type: .movie,
                                   released: "Yesterday",
                                   runtime: "123mins",
-                                  unogsdate: "2019-09")
+                                  unogsdate: "2019-09",
+                                  imdbId: "21345")
         try assertCodableConformance(of: title)
     }
 

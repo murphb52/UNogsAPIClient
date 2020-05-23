@@ -20,6 +20,7 @@ public struct TitleResponse: Codable, Equatable, Identifiable {
     public let released: String
     public let runtime: String
     public let unogsdate: String
+    public let imdbId: String
 
     public init(id: String,
                 title: String,
@@ -29,7 +30,8 @@ public struct TitleResponse: Codable, Equatable, Identifiable {
                 type: TitleType,
                 released: String,
                 runtime: String,
-                unogsdate: String) {
+                unogsdate: String,
+                imdbId: String) {
         self.id = id
         self.title = title
         self.image = image
@@ -39,6 +41,7 @@ public struct TitleResponse: Codable, Equatable, Identifiable {
         self.released = released
         self.runtime = runtime
         self.unogsdate = unogsdate
+        self.imdbId = imdbId
     }
 
     enum CodingKeys: String, CodingKey {
@@ -51,5 +54,6 @@ public struct TitleResponse: Codable, Equatable, Identifiable {
         case released
         case runtime
         case unogsdate
+        case imdbId = "imdbid"
     }
 }
