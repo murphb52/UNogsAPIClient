@@ -13,26 +13,28 @@ public struct FilteredTitlesQuery {
     let netflixRating: NetflixRating
     let imdbRating: IMDBRating
     let sort: Sort
-    let subtitle: Subtitle
-    let audio: Audio
+    let subtitle: Language
+    let audio: Language
     let videoType: VideoType
     let genreIdentifiers: [GenreResponse.GenreIdentifier]
     let minimumIMDBVotes: MinimumIMDBVotes
     let downloadable: Downloadable
     let countriesFilter: CountriesFilter
+    let subtitlesAudioAndOr: AndOr
 
     public init(queryType: QueryType =                              .default,
                 year: Year =                                        .default,
                 netflixRating: NetflixRating =                      .default,
                 imdbRating: IMDBRating =                            .default,
                 sort: Sort =                                        .default,
-                subtitle: Subtitle =                                .default,
-                audio: Audio =                                      .default,
+                subtitle: Language =                                .default,
+                audio: Language =                                   .default,
                 videoType: VideoType =                              .default,
                 genreIdentifiers: [GenreResponse.GenreIdentifier] = .default,
                 minimumIMDBVotes: MinimumIMDBVotes =                .default,
                 downloadable: Downloadable =                        .default,
-                countriesFilter: CountriesFilter =                  .default) {
+                countriesFilter: CountriesFilter =                  .default,
+                subtitlesAudioAndOr: AndOr =                        .default) {
         self.queryType = queryType
         self.year = year
         self.netflixRating = netflixRating
@@ -45,6 +47,7 @@ public struct FilteredTitlesQuery {
         self.minimumIMDBVotes = minimumIMDBVotes
         self.downloadable = downloadable
         self.countriesFilter = countriesFilter
+        self.subtitlesAudioAndOr = subtitlesAudioAndOr
     }
 
     var components: [QueryComponent] {

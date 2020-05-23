@@ -30,15 +30,49 @@ class FilteredTitlesQueryTests: XCTestCase {
     }
 
     func testAudio() {
-        XCTAssertEqual(FilteredTitlesQuery(audio: .any).queryString, "-!1990,2020-!0,5-!0,10-!-!Any-!Any-!Any-!gt1-!")
-        XCTAssertEqual(FilteredTitlesQuery(audio: .english).queryString, "-!1990,2020-!0,5-!0,10-!-!Any-!English-!Any-!gt1-!")
-        XCTAssertEqual(FilteredTitlesQuery(audio: .chinese).queryString, "-!1990,2020-!0,5-!0,10-!-!Any-!Chinese-!Any-!gt1-!")
+        let items: [(languague: Language, value: String)] = [
+            (.any, "Any"),
+            (.arabic, "Arabic"),
+            (.english, "English"),
+            (.french, "French"),
+            (.german, "German"),
+            (.hindi, "Hindi"),
+            (.italian, "Italian"),
+            (.korean, "Korean"),
+            (.mandarin, "Mandarin"),
+            (.polish, "Polish"),
+            (.portuguese, "Portuguese"),
+            (.spanish, "Spanish"),
+            (.turkish, "Turkish")
+        ]
+
+        for item in items {
+            let string = FilteredTitlesQuery(audio: item.languague).queryString
+            XCTAssertEqual(string, "-!1990,2020-!0,5-!0,10-!-!Any-!\(item.value)-!Any-!gt1-!")
+        }
     }
 
     func testSubtitle() {
-        XCTAssertEqual(FilteredTitlesQuery(subtitle: .any).queryString, "-!1990,2020-!0,5-!0,10-!-!Any-!Any-!Any-!gt1-!")
-        XCTAssertEqual(FilteredTitlesQuery(subtitle: .english).queryString, "-!1990,2020-!0,5-!0,10-!-!Any-!Any-!English-!gt1-!")
-        XCTAssertEqual(FilteredTitlesQuery(subtitle: .chinese).queryString, "-!1990,2020-!0,5-!0,10-!-!Any-!Any-!Chinese-!gt1-!")
+        let items: [(languague: Language, value: String)] = [
+            (.any, "Any"),
+            (.arabic, "Arabic"),
+            (.english, "English"),
+            (.french, "French"),
+            (.german, "German"),
+            (.hindi, "Hindi"),
+            (.italian, "Italian"),
+            (.korean, "Korean"),
+            (.mandarin, "Mandarin"),
+            (.polish, "Polish"),
+            (.portuguese, "Portuguese"),
+            (.spanish, "Spanish"),
+            (.turkish, "Turkish")
+        ]
+
+        for item in items {
+            let string = FilteredTitlesQuery(subtitle: item.languague).queryString
+            XCTAssertEqual(string, "-!1990,2020-!0,5-!0,10-!-!Any-!Any-!\(item.value)-!gt1-!")
+        }
     }
 
     func testVideoType() {
