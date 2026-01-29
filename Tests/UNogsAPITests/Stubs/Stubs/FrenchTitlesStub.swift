@@ -6,17 +6,22 @@
 //
 
 import Foundation
+@testable import UNogsAPI
 
 internal struct FrenchTitlesStub: JSONStub {
-    var request: JSONStubRequest = JSONStubRequest(queryParams: [
-        "p":    "1",
-        "q":    "-!1990,2020-!0,5-!0,10-!-!Any-!French-!Any-!gt1-!",
-        "t":    "ns",
-        "st":   "adv",
-        "cl":   "all",
-        "ob":   "Rating",
-        "sa":   "and"
-        ]
-    )
+    var request: JSONStubRequest
     var response = JSONStubResponse(fileName: "french_titles.json")
+
+    init() {
+        let query = FilteredTitlesQuery(audio: .french, subtitlesAudioAndOr: .and)
+        self.request = JSONStubRequest(queryParams: [
+            "p":  "1",
+            "q":  query.queryString,
+            "t":  "ns",
+            "st": "adv",
+            "cl": "all",
+            "ob": query.sort.rawValue,
+            "sa": "and"
+        ])
+    }
 }

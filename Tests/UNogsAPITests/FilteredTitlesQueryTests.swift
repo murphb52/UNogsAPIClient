@@ -10,8 +10,12 @@ import XCTest
 
 class FilteredTitlesQueryTests: XCTestCase {
 
+    private var currentYear: Int {
+        Calendar.current.component(.year, from: Date())
+    }
+
     func testDefaultInit() {
-        XCTAssertEqual(FilteredTitlesQuery().queryString, "-!1990,2020-!0,5-!0,10-!-!Any-!Any-!Any-!gt1-!")
+        XCTAssertEqual(FilteredTitlesQuery().queryString, "-!1990,\(currentYear)-!0,5-!0,10-!-!Any-!Any-!Any-!gt1-!")
     }
 
     func testYears() {
@@ -21,12 +25,12 @@ class FilteredTitlesQueryTests: XCTestCase {
 
     func testNetflixRating() {
         let rating = NetflixRating(minimum: 2, maximum: 3)
-        XCTAssertEqual(FilteredTitlesQuery(netflixRating: rating).queryString, "-!1990,2020-!2,3-!0,10-!-!Any-!Any-!Any-!gt1-!")
+        XCTAssertEqual(FilteredTitlesQuery(netflixRating: rating).queryString, "-!1990,\(currentYear)-!2,3-!0,10-!-!Any-!Any-!Any-!gt1-!")
     }
 
     func testIMDBRating() {
         let rating = IMDBRating(minimum: 2, maximum: 3)
-        XCTAssertEqual(FilteredTitlesQuery(imdbRating: rating).queryString, "-!1990,2020-!0,5-!2,3-!-!Any-!Any-!Any-!gt1-!")
+        XCTAssertEqual(FilteredTitlesQuery(imdbRating: rating).queryString, "-!1990,\(currentYear)-!0,5-!2,3-!-!Any-!Any-!Any-!gt1-!")
     }
 
     func testAudio() {
@@ -48,7 +52,7 @@ class FilteredTitlesQueryTests: XCTestCase {
 
         for item in items {
             let string = FilteredTitlesQuery(audio: item.languague).queryString
-            XCTAssertEqual(string, "-!1990,2020-!0,5-!0,10-!-!Any-!\(item.value)-!Any-!gt1-!")
+            XCTAssertEqual(string, "-!1990,\(currentYear)-!0,5-!0,10-!-!Any-!\(item.value)-!Any-!gt1-!")
         }
     }
 
@@ -71,30 +75,30 @@ class FilteredTitlesQueryTests: XCTestCase {
 
         for item in items {
             let string = FilteredTitlesQuery(subtitle: item.languague).queryString
-            XCTAssertEqual(string, "-!1990,2020-!0,5-!0,10-!-!Any-!Any-!\(item.value)-!gt1-!")
+            XCTAssertEqual(string, "-!1990,\(currentYear)-!0,5-!0,10-!-!Any-!Any-!\(item.value)-!gt1-!")
         }
     }
 
     func testVideoType() {
-        XCTAssertEqual(FilteredTitlesQuery(videoType: .any).queryString, "-!1990,2020-!0,5-!0,10-!-!Any-!Any-!Any-!gt1-!")
-        XCTAssertEqual(FilteredTitlesQuery(videoType: .movie).queryString, "-!1990,2020-!0,5-!0,10-!-!Movie-!Any-!Any-!gt1-!")
-        XCTAssertEqual(FilteredTitlesQuery(videoType: .series).queryString, "-!1990,2020-!0,5-!0,10-!-!Series-!Any-!Any-!gt1-!")
+        XCTAssertEqual(FilteredTitlesQuery(videoType: .any).queryString, "-!1990,\(currentYear)-!0,5-!0,10-!-!Any-!Any-!Any-!gt1-!")
+        XCTAssertEqual(FilteredTitlesQuery(videoType: .movie).queryString, "-!1990,\(currentYear)-!0,5-!0,10-!-!Movie-!Any-!Any-!gt1-!")
+        XCTAssertEqual(FilteredTitlesQuery(videoType: .series).queryString, "-!1990,\(currentYear)-!0,5-!0,10-!-!Series-!Any-!Any-!gt1-!")
     }
 
     func testGenres() {
-        XCTAssertEqual(FilteredTitlesQuery(genreIdentifiers: []).queryString, "-!1990,2020-!0,5-!0,10-!-!Any-!Any-!Any-!gt1-!")
-        XCTAssertEqual(FilteredTitlesQuery(genreIdentifiers: [1,2,3]).queryString, "-!1990,2020-!0,5-!0,10-!1,2,3-!Any-!Any-!Any-!gt1-!")
+        XCTAssertEqual(FilteredTitlesQuery(genreIdentifiers: []).queryString, "-!1990,\(currentYear)-!0,5-!0,10-!-!Any-!Any-!Any-!gt1-!")
+        XCTAssertEqual(FilteredTitlesQuery(genreIdentifiers: [1,2,3]).queryString, "-!1990,\(currentYear)-!0,5-!0,10-!1,2,3-!Any-!Any-!Any-!gt1-!")
     }
 
     func testMinimumIMDBVotes() {
-        XCTAssertEqual(FilteredTitlesQuery(minimumIMDBVotes: .init(votesRequired: 1)).queryString, "-!1990,2020-!0,5-!0,10-!-!Any-!Any-!Any-!gt1-!")
-        XCTAssertEqual(FilteredTitlesQuery(minimumIMDBVotes: .init(votesRequired: 99)).queryString, "-!1990,2020-!0,5-!0,10-!-!Any-!Any-!Any-!gt99-!")
+        XCTAssertEqual(FilteredTitlesQuery(minimumIMDBVotes: .init(votesRequired: 1)).queryString, "-!1990,\(currentYear)-!0,5-!0,10-!-!Any-!Any-!Any-!gt1-!")
+        XCTAssertEqual(FilteredTitlesQuery(minimumIMDBVotes: .init(votesRequired: 99)).queryString, "-!1990,\(currentYear)-!0,5-!0,10-!-!Any-!Any-!Any-!gt99-!")
     }
 
     func testDownloadable() {
-        XCTAssertEqual(FilteredTitlesQuery(downloadable: .empty).queryString, "-!1990,2020-!0,5-!0,10-!-!Any-!Any-!Any-!gt1-!")
-        XCTAssertEqual(FilteredTitlesQuery(downloadable: .yes).queryString, "-!1990,2020-!0,5-!0,10-!-!Any-!Any-!Any-!gt1-!Yes")
-        XCTAssertEqual(FilteredTitlesQuery(downloadable: .no).queryString, "-!1990,2020-!0,5-!0,10-!-!Any-!Any-!Any-!gt1-!No")
+        XCTAssertEqual(FilteredTitlesQuery(downloadable: .empty).queryString, "-!1990,\(currentYear)-!0,5-!0,10-!-!Any-!Any-!Any-!gt1-!")
+        XCTAssertEqual(FilteredTitlesQuery(downloadable: .yes).queryString, "-!1990,\(currentYear)-!0,5-!0,10-!-!Any-!Any-!Any-!gt1-!Yes")
+        XCTAssertEqual(FilteredTitlesQuery(downloadable: .no).queryString, "-!1990,\(currentYear)-!0,5-!0,10-!-!Any-!Any-!Any-!gt1-!No")
 
     }
 
