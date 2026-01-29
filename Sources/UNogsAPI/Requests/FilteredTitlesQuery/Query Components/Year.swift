@@ -8,7 +8,13 @@
 import Foundation
 
 public struct Year: QueryComponent, Defaultable {
-    public static let `default` = Year(minimum: 1990, maximum: 2020)
+    private static var currentYear: Int {
+        Calendar.current.component(.year, from: Date())
+    }
+
+    public static var `default`: Year {
+        Year(minimum: 1990, maximum: currentYear)
+    }
 
     let minimum: Int
     let maximum: Int
